@@ -83,6 +83,11 @@ view: order_items {
     sql: ${TABLE}.shipped_at ;;
   }
 
+  dimension: delivered_at {
+    type: string
+    sql: ${TABLE}.delivered_at ;;
+  }
+
   dimension: status {
     type: string
     sql: ${TABLE}.status ;;
@@ -97,6 +102,11 @@ view: order_items {
   measure: count {
     type: count
     drill_fields: [detail*]
+  }
+
+  measure: pending_orders {
+    type:count
+    filters: [delivered_at: "NULL"]
   }
 
   # ----- Sets of fields for drilling ------
