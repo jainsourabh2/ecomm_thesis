@@ -109,6 +109,26 @@ view: order_items {
     filters: [delivered_at: "NULL"]
   }
 
+  dimension: pending_orders_X_days {
+    type: yesno
+    view_label: "Pending Orders Since Last X Days"
+    sql: TIMESTAMP_DIFF(${created_date},CURRENT_DATE, DAY) ;;
+  }
+
+  dimension: pending_orders_30_days {
+    type: yesno
+    view_label: "Pending Orders Since Last X Days"
+    sql: ${pending_orders_X_days} < -30 ;;
+  }
+
+  measure: count_of_pending_orders_30_days {
+    type: count
+    #sql: ${id} ;;
+    view_label: "Pending Orders Since Last X Days"
+    filters: [pending_orders_30_days: "Yes",delivered_at : "NULL"]
+    drill_fields: [detail*]
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [

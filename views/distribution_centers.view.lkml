@@ -28,4 +28,12 @@ view: distribution_centers {
     type: count
     drill_fields: [id, name, products.count]
   }
+
+  dimension: dc_location {
+    view_label: "Data Warehouse Location"
+    type: location
+    sql_latitude:latitude ;;
+    sql_longitude:longitude ;;
+  }
+
 }
