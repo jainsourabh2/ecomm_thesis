@@ -133,11 +133,12 @@ view: order_items {
   set: detail {
     fields: [
       id,
-      users.last_name,
-      users.id,
       users.first_name,
-      inventory_items.id,
-      inventory_items.product_name
+      users.last_name,
+      users.email,
+      created_date,
+      inventory_items.product_name,
+      sale_price
     ]
   }
 }
