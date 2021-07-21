@@ -12,7 +12,7 @@ view: user_360 {
        ;;
 
       #datagroup_trigger: ecomm_dg
-      sql_trigger_value: SELECT CURDATE() ;;
+      sql_trigger_value: SELECT EXTRACT(MINUTE FROM CURRENT_TIMESTAMP()) ;;
     }
 
     dimension: userID {
