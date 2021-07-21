@@ -3,14 +3,15 @@ connection: "sourabhjain-thesis"
 # include all the views
 include: "/views/**/*.view"
 
-datagroup: ecomm_thesis_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
-  max_cache_age: "1 hour"
+##### Configuration #####
+datagroup: ecomm_dg {
+  sql_trigger: SELECT MAX(created_at) FROM  `sourabhjainceanalytics.ecomm.order_items`;;
+  max_cache_age: "1 hours"
+  label: "New order dates fetched"
+  description: "Data group to pich latest orders"
 }
 
-persist_with: ecomm_thesis_default_datagroup
-
-
+persist_with: ecomm_dg
 
 explore: inventory_items {
   join: products {
@@ -27,10 +28,10 @@ explore: inventory_items {
 }
 
 explore: order_items {
-  access_filter: {
-    field: distribution_centers.name
-    user_attribute: dcname
-  }
+  #access_filter: {
+  #  field: distribution_centers.name
+  #  user_attribute: dcname
+  #}
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;

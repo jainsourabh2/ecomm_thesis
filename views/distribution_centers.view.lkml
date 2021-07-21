@@ -22,6 +22,10 @@ view: distribution_centers {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    link: {
+      label: "Escalate to Supply Manager"
+      url: "https://emcedev.cloud.looker.com/dashboards/44?Distribution%20Center%20Name={{ filterable_value | url_encode }}"
+      icon_url: "http://google.com/favicon.ico"}
   }
 
   measure: count {
@@ -30,7 +34,6 @@ view: distribution_centers {
   }
 
   dimension: dc_location {
-    view_label: "Data Warehouse Location"
     type: location
     sql_latitude:latitude ;;
     sql_longitude:longitude ;;
