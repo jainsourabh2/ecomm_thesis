@@ -11,7 +11,8 @@ view: user_360 {
         user_id
        ;;
 
-      datagroup_trigger: ecomm_dg
+      #datagroup_trigger: ecomm_dg
+      sql_trigger_value: SELECT CURDATE() ;;
     }
 
     dimension: userID {

@@ -136,6 +136,12 @@ view: order_items {
     {% endif %};;
   }
 
+  dimension_group: return_after_user_created {
+    type: duration
+    sql_start: ${users.created_raw} ;;
+    sql_end: ${created_raw} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
@@ -202,17 +208,17 @@ view: order_items {
     sql: TIMESTAMP_DIFF(${created_date},CURRENT_DATE, DAY) ;;
   }
 
-  dimension: pending_orders_30_days {
+  dimension: pending_orders_7_days {
     type: yesno
     view_label: "Pending Orders Since Last X Days"
-    sql: ${pending_orders_X_days} < -30 ;;
+    sql: ${pending_orders_X_days} < -7 ;;
   }
 
-  measure: count_of_pending_orders_30_days {
+  measure: count_of_pending_orders_7_days {
     type: count
     #sql: ${id} ;;
     view_label: "Pending Orders Since Last X Days"
-    filters: [pending_orders_30_days: "Yes",delivered_at : "NULL"]
+    filters: [pending_orders_7_days: "Yes",delivered_at : "NULL",status: "Processing"]
     drill_fields: [detail*]
   }
 
