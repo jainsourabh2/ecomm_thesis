@@ -49,6 +49,29 @@ view: users {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+    action: {
+      label: "Send Customer Email"
+      url: "https://sample.com/posts"
+      icon_url: "http://google.com/favicon.ico"
+      form_param: {
+        name: "Subject"
+        type: string
+        label: "Subject"
+        required: yes
+        default: "Dear {{users.name._value}}, We are missing you!"
+      }
+      form_param: {
+        name: "Message"
+        type: textarea
+        default:
+        "Hi {{users.first_name}},
+
+        It's been a while that we havent seen you on our platform. Please use the COUPON CODE THESIS300 and get 30% off on your next order.
+
+        Happy shopping!
+        "
+      }
+    }
   }
 
   dimension: gender {
@@ -98,6 +121,6 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [id, last_name, first_name, events.count, order_items.count]
+    drill_fields: [id, last_name, first_name, order_items.count]
   }
 }

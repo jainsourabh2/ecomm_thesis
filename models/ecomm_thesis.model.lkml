@@ -55,6 +55,13 @@ explore: order_items {
     sql_on: CAST(${products.distribution_center_id} AS INT64) = ${distribution_centers.id} ;;
     relationship: many_to_one
   }
+
+  join: user_360 {
+    view_label: "User360"
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${order_items.user_id} = ${user_360.userID} ;;
+  }
 }
 
 explore: products {

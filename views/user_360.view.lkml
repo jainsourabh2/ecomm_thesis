@@ -11,7 +11,7 @@ view: user_360 {
         user_id
        ;;
 
-      datagroup_trigger: ecommerce_etl
+      datagroup_trigger: ecomm_dg
     }
 
     dimension: userID {
@@ -43,19 +43,19 @@ view: user_360 {
 
 #### Overall Orders Measures ####
 
-    measure: totalRevenue {
+    measure: totalSpend {
       description: "Total Spend by Customers"
       type: sum
       value_format_name: usd
-      sql: ${totalRevenue} ;;
+      sql: totalRevenue ;;
       drill_fields: [detail*]
     }
 
-    measure: totalOrders {
+    measure: totalOrdersPlaced {
       description: "Total orders placed by the customer"
       type: sum
       value_format_name: decimal_0
-      sql: ${totalOrders} ;;
+      sql: totalOrders ;;
       drill_fields: [detail*]
     }
 

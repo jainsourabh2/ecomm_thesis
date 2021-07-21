@@ -107,6 +107,35 @@ view: order_items {
     sql: ${TABLE}.user_id ;;
   }
 
+  parameter: date_granularity_filter {
+    type: unquoted
+    allowed_value: {
+      label: "Break down by Day"
+      value: "day"
+    }
+    allowed_value: {
+      label: "Break down by Week"
+      value: "week"
+    }
+    allowed_value: {
+      label: "Break down by Month"
+      value: "month"
+    }
+  }
+
+  dimension: date_granularity {
+    sql:
+    {% if date_granularity_filter._parameter_value == 'day' %}
+      ${created_date}
+    {% elsif date_granularity_filter._parameter_value == 'week' %}
+      ${created_week}
+    {% elsif date_granularity_filter._parameter_value == 'month' %}
+      ${created_month}
+    {% else %}
+      ${created_date}
+    {% endif %};;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
